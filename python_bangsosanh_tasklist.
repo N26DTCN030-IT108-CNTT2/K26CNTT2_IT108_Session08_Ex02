@@ -1,0 +1,48 @@
+## II. Mã nguồn Python điều khiển máy bơm
+
+Dưới đây là đoạn mã Python thực hiện việc đọc dữ liệu từ cảm biến độ ẩm và kích hoạt máy bơm khi độ ẩm xuống dưới ngưỡng cho phép:
+
+```python
+import time
+import Adafruit_DHT
+
+# Khai báo thông số phần cứng
+DHT_SENSOR = Adafruit_DHT.DHT22
+DHT_PIN = 4
+PUMP_RELAY_PIN = 17
+
+def monitor_humidity():
+    while True:
+        humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+        if humidity is not None:
+            print(f"Độ ẩm hiện tại: {humidity:.1f}% | Nhiệt độ: {temperature:.1f}C")
+            if humidity < 65.0:
+                print("Độ ẩm thấp, kích hoạt máy bơm tưới nước...")
+            else:
+                print("Độ ẩm đạt chuẩn, hệ thống nghỉ.")
+        else:
+            print("Lỗi: Không thể đọc dữ liệu từ cảm biến!")
+        time.sleep(10)
+
+if __name__ == "__main__":
+    monitor_humidity()
+```
+| Tiêu chuẩn kỹ thuật | Bộ điều khiển cũ (Model A) | Bộ điều khiển mới (Model B) |
+| -------- | -------------- | ----------------- |
+| Vi xử lý trung tâm | ATmega328P (8-bit) | ESP32-WROOM (32-bit lõi kép) |
+| Kết nối mạng | Cáp mạng dây cố định (Ethernet) | Tích hợp Wi-Fi và Bluetooth 4.2 |
+| Mức tiêu thụ điện năng |Trung bình cao |Tối ưu hóa chế độ tiết kiệm năng lượng |
+| Khả năng mở rộng | Hạn chế số lượng cổng kết nối | Hỗ trợ nhiều giao thức I2C, SPI, UART |
+
+
+IV. Task List kiểm tra trước khi bàn giao
+
+[x] Kiểm tra nguồn điện ổn định cho bo mạch trung tâm và cảm biến
+
+[x] Cấu hình lại địa chỉ IP tĩnh và tham số kết nối trong tệp settings.env
+
+[ ] Chạy thử nghiệm tập lệnh main.py trên môi trường thực tế
+
+[ ] Kiểm tra phản hồi dữ liệu thời gian thực trên giao diện máy chủ
+
+[ ] Lưu ý sử dụng ký tự thoát nếu cần hiển thị dấu đặc biệt trong tài liệu
