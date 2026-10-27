@@ -1,0 +1,32 @@
+# 1. Báo cáo phân tích (I/O)
+
+## Định nghĩa Input (Văn bản thô)
+- Tài liệu hướng dẫn cài đặt cảm biến độ ẩm đất cho trang trại Lan (mô tả quy trình, thông số kỹ thuật, yêu cầu kiểm tra).
+- Đoạn mã Python thô điều khiển máy bơm tự động qua cổng GPIO, chưa được định dạng màu sắc hay tách biệt rõ ràng với văn bản giải thích.
+- Bảng thông số kỹ thuật thô liệt kê đặc tính của hai dòng cảm biến (loại cũ truyền thống và loại mới điện dung).
+- Danh sách các bước kiểm tra thiết bị thủ công trước khi vận hành hệ thống.
+
+## Định nghĩa Output (Giao diện render chuyên nghiệp)
+- Văn bản tài liệu được phân tách mạch lạc, rõ ràng giữa phần lý thuyết, câu lệnh Terminal và mã nguồn lập trình.
+- Sử dụng **Inline Code** cho các biến hệ thống, tên tệp và câu lệnh ngắn (pin_mode, sensor.py, pip install).
+- Sử dụng **Code Block** có hỗ trợ tô sáng cú pháp (Python Syntax Highlighting) cho đoạn mã điều khiển máy bơm.
+- Sử dụng bảng Markdown chuẩn (Table) để so sánh trực quan các thông số kỹ thuật giữa hai loại cảm biến.
+- Sử dụng danh sách công việc (Task List) để kiểm tra trực tiếp trạng thái hoạt động của thiết bị trước khi triển khai thực tế.
+
+---
+
+# 2. Source code (Nội dung file .md)
+
+# Hướng Dẫn Cài Đặt Hệ Thống Cảm Biến Độ Ẩm Trang Trại Lan
+
+Tài liệu này mô tả chi tiết quy trình thiết lập hệ thống tự động hóa tưới nước cho vườn lan, bao gồm cấu hình phần mềm, lập trình điều khiển và bảng so sánh thiết bị.
+
+## I. Cấu hình môi trường và thư viện
+
+Trước khi chạy script điều khiển, bạn cần cài đặt các thư viện cần thiết thông qua Terminal bằng câu lệnh:
+
+`pip install RPi.GPIO Adafruit_DHT`
+
+Kiểm tra trạng thái kết nối phần cứng bằng biến môi trường `SENSOR_PIN = 4` đã được khai báo trong file cấu hình `config.env`.
+
+## II. Mã nguồn Python điều khiển máy bơm
